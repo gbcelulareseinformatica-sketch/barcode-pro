@@ -26,17 +26,19 @@ jobs:
       - name: Compilar aplicativo
         run: npm run build
 
-      - name: Preparar Android
-        run: npx cap add android
-
-      - name: Sincronizar Android
-        run: npx cap sync android
-
       - name: Preparar Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 17
+
+      - name: Criar projeto Android
+        run: |
+          rm -rf android
+          npx cap add android
+
+      - name: Sincronizar Android
+        run: npx cap sync android
 
       - name: Gerar APK
         working-directory: android
