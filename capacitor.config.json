@@ -1,0 +1,7 @@
+
+{
+  "appId": "com.barcodepro.app",
+  "appName": "Barcode Pro",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
