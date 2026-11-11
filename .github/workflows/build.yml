@@ -1,5 +1,5 @@
 
-name: Verificar Barcode Pro
+name: Gerar APK Barcode Pro
 
 on:
   push:
@@ -25,3 +25,25 @@ jobs:
 
       - name: Compilar aplicativo
         run: npm run build
+
+      - name: Preparar Android
+        run: npx cap add android
+
+      - name: Sincronizar Android
+        run: npx cap sync android
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Gerar APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug
+
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Barcode-Pro-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
