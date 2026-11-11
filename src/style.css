@@ -75,122 +75,184 @@ body {
 }
 
 main {
-  width: 100%;
-  max-width: 1150px;
-  margin: auto;
-  padding: 35px 22px;
-}
+/* BARCODE PRO - CADASTRO DE PRODUTOS */
 
-.welcome {
-  margin-bottom: 28px;
-}
-
-.welcome p {
-  color: #168cff;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
-.welcome h2 {
-  font-size: clamp(23px, 5vw, 32px);
-  margin-bottom: 10px;
-}
-
-.welcome span {
-  color: #91a2b9;
-  font-size: 14px;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 38px;
-}
-
-.stat-card {
-  background: #142239;
-  border: 1px solid #263b59;
-  border-radius: 13px;
+.product-form {
+  margin-top: 20px;
   padding: 22px;
+  background: #142239;
+  border: 1px solid #294363;
+  border-radius: 14px;
 }
 
-.stat-card span {
+.product-form label {
   display: block;
-  font-size: 10px;
-  color: #9aadc6;
+  color: #a9bdd6;
+  font-size: 12px;
   font-weight: bold;
+  margin: 18px 0 8px;
 }
 
-.stat-card strong {
-  display: block;
-  font-size: 32px;
-  margin-top: 12px;
-  color: #42a5ff;
+.product-form input,
+.product-form select,
+#searchProduct {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #344d6d;
+  background: #0c1729;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
 }
 
-.actions h3 {
-  font-size: 13px;
-  letter-spacing: 1px;
-  margin-bottom: 17px;
+.product-form input:focus,
+.product-form select:focus,
+#searchProduct:focus {
+  border-color: #168cff;
 }
 
-.action-grid {
+.product-form select option {
+  background: #142239;
+}
+
+.form-columns {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
 
-.action-grid button {
-  min-height: 125px;
-  border: 1px solid #294363;
-  border-radius: 13px;
-  background: #142239;
-  color: #42a5ff;
-  font-size: 30px;
-  cursor: pointer;
-  transition: .2s;
+.form-columns label {
+  line-height: 1.5;
 }
 
-.action-grid button:hover {
-  background: #1b3454;
-  border-color: #168cff;
-  transform: translateY(-2px);
-}
-
-.action-grid button span {
-  display: block;
-  margin-top: 12px;
-  color: #eaf0f8;
-  font-size: 13px;
+.primary-button {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 9px;
+  background: #087cf0;
+  color: white;
   font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
 }
 
-footer {
-  margin-top: auto;
-  padding: 22px;
+.primary-button:active {
+  transform: scale(.98);
+}
+
+.form-message {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #ffcc66;
+}
+
+.form-message.success {
+  color: #36d99a;
+}
+
+.form-message.error {
+  color: #ff7777;
+}
+
+.product-section {
+  margin-top: 35px;
+}
+
+#searchProduct {
+  margin: 10px 0 20px;
+}
+
+.product-card {
+  background: #142239;
+  border: 1px solid #294363;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.product-info h4 {
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+
+.product-info span {
+  color: #42a5ff;
+  font-size: 12px;
+}
+
+.product-info p {
+  color: #b7c6da;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.product-info strong {
+  color: #42a5ff;
+}
+
+.barcode {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 15px auto;
+  background: white;
+  padding: 8px;
+}
+
+.product-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.product-buttons button {
+  flex: 1;
+  min-height: 42px;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.print-button {
+  background: #087cf0;
+  color: white;
+}
+
+.delete-button {
+  background: #54252d;
+  color: #ff9ca5;
+}
+
+.empty-message {
+  padding: 25px;
   text-align: center;
-  color: #71839d;
-  font-size: 10px;
-  border-top: 1px solid #24334b;
+  color: #91a2b9;
+  background: #142239;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 @media (max-width: 500px) {
-  .stats {
+  .product-form {
+    padding: 16px;
+  }
+
+  .form-columns {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .stat-card {
-    padding: 17px;
-  }
-
-  .stat-card strong {
-    font-size: 26px;
-  }
-
-  main {
-    padding: 28px 16px;
+  .product-buttons button {
+    font-size: 10px;
   }
 }
