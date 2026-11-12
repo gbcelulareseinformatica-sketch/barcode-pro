@@ -320,6 +320,7 @@ productList.addEventListener('click', event => {
   }
 });
 
+
 function printProduct(id) {
   const product = getProducts().find(p => p.id === id);
   if (!product) return;
@@ -344,31 +345,62 @@ function printProduct(id) {
     <html lang="pt-BR">
     <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Etiqueta - ${escapeHTML(product.name)}</title>
+
       <style>
         body {
           font-family: Arial, sans-serif;
           text-align: center;
           padding: 10px;
         }
+
+        .back-button {
+          display: block;
+          width: 100%;
+          max-width: 300px;
+          margin: 10px auto 25px;
+          padding: 15px;
+          background: #1769e0;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+
         .label {
           display: inline-block;
           padding: 8px;
           max-width: 100%;
         }
+
         h3 { font-size: 14px; margin: 4px; }
         p { font-size: 12px; margin: 4px; }
         svg { max-width: 100%; height: auto; }
+
         @page { margin: 5mm; }
+
+        @media print {
+          .back-button {
+            display: none !important;
+          }
+        }
       </style>
     </head>
+
     <body>
+      <button class="back-button" onclick="window.close()">
+        ← VOLTAR AO APLICATIVO
+      </button>
+
       <div class="label">
         <h3>${escapeHTML(product.name)}</h3>
         ${barcode}
         <p>${escapeHTML(product.code)}</p>
         <p>${money(product.price)}</p>
       </div>
+
       <script>
         window.onload = () => {
           window.print();
@@ -377,6 +409,10 @@ function printProduct(id) {
     </body>
     </html>
   `);
+
+  printWindow.document.close();
+}
+
 
   printWindow.document.close();
 }
