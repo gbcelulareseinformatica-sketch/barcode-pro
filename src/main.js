@@ -37,10 +37,12 @@ app.innerHTML = `
           <span>PRODUTOS CADASTRADOS</span>
           <strong id="totalProducts">0</strong>
         </article>
+
         <article class="stat-card">
           <span>CÓDIGOS INTERNOS</span>
           <strong id="totalInternal">0</strong>
         </article>
+
         <article class="stat-card">
           <span>CÓDIGOS EAN-13</span>
           <strong id="totalEAN">0</strong>
@@ -87,6 +89,7 @@ app.innerHTML = `
               <input name="price" type="number"
                 min="0" step="0.01" placeholder="0,00" />
             </div>
+
             <div>
               <label>Quantidade</label>
               <input name="quantity" type="number"
@@ -159,6 +162,7 @@ function updateStats(products) {
 
 function renderProducts() {
   const products = getProducts();
+
   const search = document.querySelector('#searchProduct')
     .value.trim().toLowerCase();
 
@@ -185,9 +189,15 @@ function renderProducts() {
       <div class="product-info">
         <h4>${escapeHTML(product.name)}</h4>
         <span>${escapeHTML(product.category)}</span>
-        <p>Código: <strong>${escapeHTML(product.code)}</strong></p>
+
+        <p>Código:
+          <strong>${escapeHTML(product.code)}</strong>
+        </p>
+
         <p>Preço: ${money(product.price)}</p>
+
         <p>Estoque: ${escapeHTML(product.quantity)}</p>
+
         <svg class="barcode"
           id="barcode-${escapeHTML(product.id)}"></svg>
       </div>
@@ -197,6 +207,7 @@ function renderProducts() {
           data-print="${escapeHTML(product.id)}">
           IMPRIMIR
         </button>
+
         <button class="delete-button"
           data-delete="${escapeHTML(product.id)}">
           EXCLUIR
@@ -227,6 +238,7 @@ function renderProducts() {
 
 codeType.addEventListener('change', () => {
   const isEAN = codeType.value === 'ean';
+
   eanArea.hidden = !isEAN;
   eanInput.required = isEAN;
 });
@@ -287,12 +299,15 @@ form.addEventListener('submit', event => {
     message.className = 'form-message success';
 
     form.reset();
+
     eanArea.hidden = true;
     eanInput.required = false;
 
     renderProducts();
+
   } catch (error) {
     console.error(error);
+
     message.textContent = 'Não foi possível salvar o produto.';
     message.className = 'form-message error';
   }
@@ -320,9 +335,13 @@ productList.addEventListener('click', event => {
   }
 });
 
+// =====================================
+// IMPRESSÃO DE ETIQUETAS
+// =====================================
 
 function printProduct(id) {
   const product = getProducts().find(p => p.id === id);
+
   if (!product) return;
 
   const svg = document.querySelector(
@@ -345,7 +364,9 @@ function printProduct(id) {
     <html lang="pt-BR">
     <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
       <title>Etiqueta - ${escapeHTML(product.name)}</title>
 
       <style>
@@ -367,6 +388,7 @@ function printProduct(id) {
           border-radius: 8px;
           font-size: 16px;
           font-weight: bold;
+          cursor: pointer;
         }
 
         .label {
@@ -375,11 +397,24 @@ function printProduct(id) {
           max-width: 100%;
         }
 
-        h3 { font-size: 14px; margin: 4px; }
-        p { font-size: 12px; margin: 4px; }
-        svg { max-width: 100%; height: auto; }
+        h3 {
+          font-size: 14px;
+          margin: 4px;
+        }
 
-        @page { margin: 5mm; }
+        p {
+          font-size: 12px;
+          margin: 4px;
+        }
+
+        svg {
+          max-width: 100%;
+          height: auto;
+        }
+
+        @page {
+          margin: 5mm;
+        }
 
         @media print {
           .back-button {
@@ -390,14 +425,18 @@ function printProduct(id) {
     </head>
 
     <body>
-      <button class="back-button" onclick="window.close()">
+      <button class="back-button"
+        onclick="window.close()">
         ← VOLTAR AO APLICATIVO
       </button>
 
       <div class="label">
         <h3>${escapeHTML(product.name)}</h3>
+
         ${barcode}
+
         <p>${escapeHTML(product.code)}</p>
+
         <p>${money(product.price)}</p>
       </div>
 
@@ -413,8 +452,5 @@ function printProduct(id) {
   printWindow.document.close();
 }
 
-
-  printWindow.document.close();
-}
-
+// Inicializar aplicativo
 renderProducts();
